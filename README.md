@@ -6,6 +6,14 @@ Generalized PCA for non-normally distributed data. If you find this useful pleas
 
 An [R implementation](https://github.com/willtownes/glmpca) is also available.
 
+## Install
+
+The glmpca package can be installed from [pypi](https://pypi.org/project/glmpca/0.1.0)
+
+```python
+pip3 install glmpca
+```
+
 ## Issues and bug reports
 
 Please use https://github.com/willtownes/glmpca-py/issues to submit issues, bug reports, and comments.
