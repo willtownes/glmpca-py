@@ -4,8 +4,9 @@ nosetests --with-coverage --cover-erase --cover-package=glmpca
 """
 
 import unittest
-from glmpca import glmpca
 import numpy as np
+from glmpca import glmpca
+np.random.seed(202)
 
 class Test_glmpca(unittest.TestCase):
     def setUp(self):
@@ -26,7 +27,7 @@ class Test_glmpca(unittest.TestCase):
     def test_glmpca_mult_likelihood(self):
         g1 = glmpca.glmpca(self.Y,2,fam="mult",sz=np.array(range(1,6)))
     def test_glmpca_bern_likelihood(self):
-        g1 = glmpca.glmpca(self.Ybin,2,fam="bern")
+        g1 = glmpca.glmpca(self.Ybin,2,fam="bern",penalty=10)
     def test_glmpca_dims_L1(self):
         g1 = glmpca.glmpca(self.Y,1,fam="poi")
     def test_glmpca_covariates(self):
