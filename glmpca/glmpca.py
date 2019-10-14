@@ -88,12 +88,12 @@ def mat_binom_dev(X,P,n):
   X,P are JxN arrays
   n is vector of length N (same as cols of X,P)
   """
-  with np.errstate(divide='ignore'):
+  with np.errstate(divide='ignore',invalid='ignore'):
     term1= X*log(X/(n*P))
   term1= term1[np.isfinite(term1)].sum()
   #nn= x<n
   nx= n-X
-  with np.errstate(divide='ignore'):
+  with np.errstate(divide='ignore',invalid='ignore'):
     term2= nx*log(nx/(n*(1-P)))
   term2= term2[np.isfinite(term2)].sum()
   return 2*(term1+term2)
@@ -160,9 +160,18 @@ class GlmpcaFamily(object):
       def dev_func(Y,R):
         return self.family.deviance(Y,ilfunc(R))
     self.dev_func = dev_func
+  def __str__(self):
+    return "GlmpcaFamily object of type {}".format(self.glmpca_fam)
 
 def remove_intercept(X):
-  X-= colMeans(X)
+  cm = colMeans(X)
+  try:
+    X-= cm
+  except TypeError as err:
+    if X.dtype != cm.dtype:
+      X = X.astype(cm.dtype) - cm
+    else:
+      raise err
   return X[:,colNorms(X)>1e-12]
 
 def glmpca_init(Y,fam,sz=None,nb_theta=None):
