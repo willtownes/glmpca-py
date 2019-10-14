@@ -3,7 +3,7 @@ python:
   - "3.5"
   - "3.6"
   - "3.7"
-install: "pip install coverage nose unittest"
+install: "pip install coverage unittest2"
 script: "nosetests --with-coverage --cover-package=glmpca"
 branches:
   only:
