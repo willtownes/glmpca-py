@@ -228,7 +228,7 @@ def est_nb_theta(y,mu,th):
   #grad= score-u
   #exp(u+sign(grad)*min(maxstep,abs(grad)))
 
-def glmpca(Y, L, fam="poi", ctl = {"maxIter":1000, "eps":1e-4}, penalty = 1,
+def glmpca(Y, L, fam="poi", ctl = {"maxIter":1000, "eps":1e-4, "optimizeTheta":True}, penalty = 1,
            verbose = False, init = {"factors": None, "loadings":None},
            nb_theta = 100, X = None, Z = None, sz = None):
   """
@@ -248,7 +248,11 @@ def glmpca(Y, L, fam="poi", ctl = {"maxIter":1000, "eps":1e-4}, penalty = 1,
   - nb: negative binomial
   - mult: binomial approximation to multinomial
   - bern: Bernoulli
-  ctl: a dictionary of control parameters for optimization.
+  ctl: a dictionary of control parameters for optimization. Valid keys:
+  - maxIter: an integer, maximum number of iterations
+  - eps: a float, maximum relative change in deviance tolerated for convergence
+  - optimizeTheta: a bool, indicating if the overdispersion parameter of the NB
+    distribution is optimized (default), or fixed to the value provided in nb_theta.
   penalty: the L2 penalty for the latent factors (default = 1).
     Regression coefficients are not penalized.
   verbose: logical value indicating whether the current deviance should
@@ -258,6 +262,7 @@ def glmpca(Y, L, fam="poi", ctl = {"maxIter":1000, "eps":1e-4}, penalty = 1,
   nb_theta: negative binomial dispersion parameter. Smaller values mean more dispersion
     if nb_theta goes to infinity, this is equivalent to Poisson
     Note that the alpha in the statsmodels package is 1/nb_theta.
+    If ctl["optimizeTheta"] is True, this is used as initial value for optimization
   X: array_like of column (observations) covariates. Any column with all
     same values (eg. 1 for intercept) will be removed. This is because we force
     the intercept and want to avoid collinearity.
@@ -369,7 +374,8 @@ def glmpca(Y, L, fam="poi", ctl = {"maxIter":1000, "eps":1e-4}, penalty = 1,
       infos= crossprod(ig["info"], V[:,k]**2) + penalty*(k in lid)
       U[:,k]+= grads/infos
     if fam=="nb":
-      nb_theta= est_nb_theta(Y,gf.family.link.inverse(rfunc(U,V)),nb_theta)
+      if ctl["optimizeTheta"]:
+        nb_theta= est_nb_theta(Y,gf.family.link.inverse(rfunc(U,V)),nb_theta)
       gf= GlmpcaFamily(fam,nb_theta)
   #postprocessing: include row and column labels for regression coefficients
   if ncol(Z)==0: G= None

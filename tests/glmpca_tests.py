@@ -36,6 +36,10 @@ class Test_glmpca(unittest.TestCase):
         g1= glmpca.glmpca(self.Y,2,fam="poi",X=X[:,None],Z=Z[:,None])
     def test_glmpca_extra_args(self):
         g1= glmpca.glmpca(self.Y,2,fam="poi",verbose=True,penalty=10)
+    def test_glmpca_fixed_overdispersion(self):
+        fixed_theta = 123
+        g_nb= glmpca.glmpca(self.Y,2,fam="nb", nb_theta = fixed_theta, ctl={"maxIter":1000, "eps":1e-4, "optimizeTheta":False})
+        self.assertEqual(fixed_theta,g_nb['glmpca_family'].nb_theta)
     def test_glmpca_pre_initialized(self):
         f0 = np.random.randn(5,2)/10
         l0 = np.random.randn(10,2)/10
