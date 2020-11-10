@@ -4,7 +4,6 @@ Python implementation of the generalized PCA for dimension reduction of non-norm
 import numpy as np
 from numpy import log
 from scipy.special import digamma,polygamma
-import statsmodels.api as sm
 import statsmodels.genmod.families as smf
 from decimal import Decimal
 
@@ -58,7 +57,6 @@ def ortho(U, V, A, X=1, G=None, Z=0):
   """
   if np.all(X==1): X = cvec1(nrow(U))
   if np.all(Z==0): Z = np.zeros((nrow(V),1))
-  L= ncol(U)
   if np.all(G==0): G= None
   #we assume A is not null or zero
   #remove correlation between U and A
@@ -388,7 +386,7 @@ def glmpca(Y, L, fam="poi", ctl = {"maxIter":1000, "eps":1e-4, "optimizeTheta":T
   return res
 
 if __name__=="__main__":
-  from numpy import array,exp,random,repeat
+  from numpy import exp,random,repeat
   mu= exp(random.randn(20,100))
   mu[range(10),:] *= exp(random.randn(100))
   clust= repeat(["red","black"],10)
