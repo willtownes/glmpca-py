@@ -8,10 +8,16 @@ An [R implementation](https://github.com/willtownes/glmpca) is also available.
 
 ## Install
 
-The glmpca package can be installed from [pypi](https://pypi.org/project/glmpca/0.1.1)
+The release version of glmpca package can be installed from [pypi](https://pypi.org/project/glmpca/0.1.1)
 
 ```python
 pip3 install glmpca
+```
+
+The development version can be installed from github
+
+```python
+pip3 install git+https://github.com/willtownes/glmpca-py.git@master
 ```
 
 ## Issues and bug reports
