@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="glmpca",
-    version="0.1.0",
+    version="0.1.1",
     author="Will Townes",
     author_email="will.townes@gmail.com",
     description="Generalized PCA for dimension reduction of non-normally distributed data",
@@ -23,4 +23,9 @@ setuptools.setup(
         "Topic :: Scientific/Engineering :: Bio-Informatics"
     ],
     python_requires='>=3.5',
+    install_requires=[
+          'numpy',
+          'scipy',
+          'statsmodels'
+      ]
 )

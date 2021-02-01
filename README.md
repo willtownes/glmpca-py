@@ -2,13 +2,13 @@
 
 [![Build Status](https://travis-ci.com/willtownes/glmpca-py.svg?branch=master)](https://travis-ci.com/willtownes/glmpca-py)
 
-Generalized PCA for non-normally distributed data. If you find this useful please cite [Feature Selection and Dimension Reduction based on a Multinomial Model](https://www.biorxiv.org/content/10.1101/574574v1).
+Generalized PCA for non-normally distributed data. If you find this useful please cite [Feature Selection and Dimension Reduction based on a Multinomial Model](https://doi.org/10.1186/s13059-019-1861-6).
 
 An [R implementation](https://github.com/willtownes/glmpca) is also available.
 
 ## Install
 
-The glmpca package can be installed from [pypi](https://pypi.org/project/glmpca/0.1.0)
+The glmpca package can be installed from [pypi](https://pypi.org/project/glmpca/0.1.1)
 
 ```python
 pip3 install glmpca
