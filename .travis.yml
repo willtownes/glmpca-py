@@ -5,7 +5,7 @@ python:
   - "3.7"
   - "3.8"
   - "3.9"
-install: "pip install coverage unittest2"
+install: "pip install coverage unittest2 numpy scipy statsmodels"
 script: "nosetests --with-coverage --cover-package=glmpca"
 branches:
   only:
