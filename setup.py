@@ -23,9 +23,5 @@ setuptools.setup(
         "Topic :: Scientific/Engineering :: Bio-Informatics"
     ],
     python_requires='>=3.5',
-    install_requires=[
-          'numpy>=1.16.5',
-          'scipy',
-          'statsmodels'
-      ]
+    install_requires=['scipy','statsmodels']
 )
