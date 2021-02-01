@@ -24,7 +24,7 @@ setuptools.setup(
     ],
     python_requires='>=3.5',
     install_requires=[
-          'numpy',
+          'numpy>=1.16.5',
           'scipy',
           'statsmodels'
       ]
